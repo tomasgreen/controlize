@@ -3,7 +3,7 @@
 
 Depedenc free and responsive html5 video/audio controls with responsive with touch support and about 14 KB miminized including css.
 
-[http://www.tomasgreen.se/controlize](Demo and documentation).
+[Demo and documentation](http://www.tomasgreen.se/controlize).
 
 
 # License
