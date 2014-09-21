@@ -1,7 +1,7 @@
 # controlize
 ==========
 
-Depedenc free and responsive html5 video/audio controls with responsive with touch support and about 14 KB miminized including css.
+Dependency free and responsive html5 video/audio controls with touch support and about 14 KB miminized including css.
 
 [Demo and documentation](http://www.tomasgreen.se/controlize).
 
