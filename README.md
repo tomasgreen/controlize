@@ -1,4 +1,4 @@
-# controlize
+controlize
 ==========
 
 Dependency free and responsive html5 video/audio controls with touch support and about 14 KB miminized including css.
