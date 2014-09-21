@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+	<title>Controlize</title>
+	<link rel="stylesheet" type="text/css" href="http://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.1/normalize.min.css">
+	<link rel="stylesheet" type="text/css" href="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.0/styles/github.min.css">
+	<link rel="stylesheet" type="text/css" href="/static/controlize-0.1.0.min.css">
+	<link rel="stylesheet" type="text/css" href="/static/style.css">
+</head>
+<body>
+	<div class="site">
+		<div class="row-container first-container" style="padding-top: 15px;">
+			<div class="row">
+				<div class="col">
+					<a href="/">Controlize</a>
+					<span style="float: right; margin-left: 10px;"><a href="https://github.com/tomasgreen/controlize/archive/master.zip"> Download</a></span>
+					<span style="float: right"><a href="https://github.com/tomasgreen/controlize">Github</a></span>
+				</div>
+				<hr class="menu">
+			</div>
+			<div class="row">
+				<div class="col">
+					<ul>
+						<li>Dependency free</li>
+						<li>Responsive</li>
+						<li>Touch support</li>
+						<li>About 14 KB miminized including css</li>
+					</ul>
+					<div style="text-align: center">
+						<a href="#options" class="bigbutton docs">Documentation</a>
+						<a href="https://github.com/tomasgreen/controlize/archive/master.zip" class="bigbutton">Download</a>
+						<a href="https://github.com/tomasgreen/controlize" class="bigbutton">View on Github</a>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row-container">
+			<div class="row">
+				<div class="col">
+					<h1>Video</h1>
+					<video id="video1">
+						<source src="media/sheep.mp4" type="video/mp4">
+						<source src="media/sheep.webm" type="video/webm">
+					</video>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col">
+					<pre><code class="js">new controlize(document.getElementById('video1'));</code></pre>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col">
+					<h2>Animations</h2>
+					<p>There is a problem will the fullscreen api and animations. If you would for some reason use <strong>-webkit-animation-fill-mode: both;</strong> (as <a href="http://daneden.github.io/animate.css/">animated.css</a> does) on a parent element to the video, <strong>the fullscreen will break</strong>.</p>
+					<p>You could remove the animations after they've finished, or you could add this to your style:</p>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col">
+					<pre><code class="css">.animated {
+   -webkit-animation-fill-mode: none;
+   animation-fill-mode: none;
+}</code></pre>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col">
+					<h1>Audio</h1>
+					<audio id="audio1">
+						<source src="media/html5audio.mp3" type="audio/mp3"/>
+						<source src="media/html5audio.ogg" type="audio/ogg"/>
+					</audio>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col">
+					<pre><code class="js">new controlize(document.getElementById('audio1'),{
+    playWithSpace: false
+});</code></pre>
+				</div>
+			</div>
+		</div>
+		<div class="row-container thid-container">
+			<a name="options"></a>
+			<div class="row">
+				<div class="col">
+					<h1>Options</h1>
+				</div>
+			</div>
+			<div class="row">
+				<table class="table">
+					<thead>
+						<tr>
+							<th style="width: 250px">Property</th>
+							<th>Description</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>showControls <small>bool</small>
+								 <br><small>(default: true) </small>
+								</td>
+							<td>Show/Hide the controlpanel for videos</td>
+						</tr>
+						<tr>
+							<td>showMuteButton <small>bool</small>
+								<br><small>(default video: true)</small>
+								<br><small>(default audio: false)</small>
+								<br><small>(default touch: false)</small>
+							</td>
+							<td>Show/Hide the mute button.</td>
+						</tr>
+						<tr>
+							<td>showFullscreenButton <small>bool</small>
+								<br><small>(default video: true)</small>
+								<br><small>(default audio: false)</small>
+								<br><small>(default touch: false)</small>
+							</td>
+							<td>Show/Hide the fullscreen button.</td>
+						</tr>
+						<tr>
+							<td>showTime <small>bool</small>
+								<br><small>(default: true) </small>
+							</td>
+							<td>Show/Hide the time elapsed and time left label.</td>
+						</tr>
+						<tr>
+							<td>showPlayButton <small>bool</small>
+								<br><small>(default: true) </small>
+							</td>
+							<td>Show/Hide the play button.</td>
+						</tr>
+						<tr>
+							<td>showSeekBar <small>bool</small>
+								<br><small>(default: true) </small>
+							</td>
+							<td>Show/Hide the seek bar.</td>
+						</tr>
+						<tr>
+							<td>playWithSpace <small>bool</small>
+								<br><small>(default: true) </small>
+								<br><small>(default touch: false)</small>
+							</td>
+							<td>Enable/Disable playing the element with the space button. It will only work while the tag is in view, and if more than one tag is in view, they will all play. This option also disables the "page down on space" function when the element is in view.</td>
+						</tr>
+						<tr>
+							<td>playWithMouse <small>bool</small>
+								<br><small>(default video: true) </small>
+								<br><small>(default audio: false) </small>
+								<br><small>(default touch: false)</small>
+							</td>
+							<td>Enable/Disable the play/pause when clicking a video.</td>
+						</tr>
+						<tr>
+							<td>playOnSeek <small>bool</small>
+								<br><small>(default: true) </small>
+							</td>
+							<td>Play the video/audio after moving the seeker.</td>
+						</tr>
+						<tr>
+							<td>hideMouseOnHover <small>bool</small>
+								<br><small>(default video: true) </small>
+								<br><small>(default audio: false) </small>
+								<br><small>(default touch: false)</small>
+							</td>
+							<td>Show/Hide the mouse when hovering over a video</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<footer></footer>
+		</div>
+	</div>
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.0/highlight.min.js"></script>
+	<script src="/static/controlize-0.1.0.min.js"></script>
+	<script type="text/javascript">
+		hljs.initHighlightingOnLoad();
+		document.addEventListener('DOMContentLoaded', function () {
+			new controlize(document.getElementById('video1'));
+			new controlize(document.getElementById('audio1'),{
+				playWithSpace: false
+			});
+		});
+	</script>
+</body>
+</html>
