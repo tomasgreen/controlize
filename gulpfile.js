@@ -28,7 +28,8 @@ gulp.task('js', function () {
 		.pipe(gulp.dest('./build/'))
 		.pipe(rename(name + '.min.js'))
 		.pipe(streamify(uglify()))
-		.pipe(gulp.dest('./build/'));
+		.pipe(gulp.dest('./build/'))
+		.pipe(gulp.dest('./examples/static'));
 });
 /*
 	css
@@ -42,7 +43,8 @@ gulp.task('less', function () {
 		.pipe(minifyCSS({
 			keepSpecialComments: 0
 		}))
-		.pipe(gulp.dest('./build/'));
+		.pipe(gulp.dest('./build/'))
+		.pipe(gulp.dest('./examples/static'));
 });
 
 var run = ['js', 'less'];
