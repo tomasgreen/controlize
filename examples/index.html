@@ -7,7 +7,7 @@
 	<title>Controlize</title>
 	<link rel="stylesheet" type="text/css" href="http://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.1/normalize.min.css">
 	<link rel="stylesheet" type="text/css" href="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.0/styles/github.min.css">
-	<link rel="stylesheet" type="text/css" href="/static/controlize-0.1.0.min.css">
+	<link rel="stylesheet" type="text/css" href="/static/controlize-0.1.1.min.css">
 	<link rel="stylesheet" type="text/css" href="/static/style.css">
 </head>
 <body>
@@ -15,7 +15,7 @@
 		<div class="row-container first-container" style="padding-top: 15px;">
 			<div class="row">
 				<div class="col">
-					<a href="/">Controlize</a>
+					<a href="http://www.tomasgreen.se/controlize">Controlize</a>
 					<span style="float: right; margin-left: 10px;"><a href="https://github.com/tomasgreen/controlize/archive/master.zip"> Download</a></span>
 					<span style="float: right"><a href="https://github.com/tomasgreen/controlize">Github</a></span>
 				</div>
@@ -30,7 +30,7 @@
 						<li>About 14 KB miminized including css</li>
 					</ul>
 					<div style="text-align: center">
-						<a href="#options" class="bigbutton docs">Documentation</a>
+						<a href="#documentation" class="bigbutton docs">Documentation</a>
 						<a href="https://github.com/tomasgreen/controlize/archive/master.zip" class="bigbutton">Download</a>
 						<a href="https://github.com/tomasgreen/controlize" class="bigbutton">View on Github</a>
 					</div>
@@ -85,7 +85,28 @@
 			</div>
 		</div>
 		<div class="row-container thid-container">
-			<a name="options"></a>
+			<a name="documentation"></a>
+<div class="row">
+				<div class="col">
+					<h1>Methods</h1>
+				</div>
+			</div>
+			<div class="row">
+				<table class="table">
+					<thead>
+						<tr>
+							<th style="width: 250px">Method</th>
+							<th>Description</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td><small>void</small> draw()</td>
+							<td>Draw the controls. This method is called upon initialization but can be usedful if you've encountered some kind of rendering bug.</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
 			<div class="row">
 				<div class="col">
 					<h1>Options</h1>
@@ -176,7 +197,7 @@
 		</div>
 	</div>
 	<script src="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.0/highlight.min.js"></script>
-	<script src="/static/controlize-0.1.0.min.js"></script>
+	<script src="static/controlize-0.1.1.min.js"></script>
 	<script type="text/javascript">
 		hljs.initHighlightingOnLoad();
 		document.addEventListener('DOMContentLoaded', function () {

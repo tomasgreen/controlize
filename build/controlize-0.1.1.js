@@ -1,8 +1,9 @@
 /*
-	# controlize
-	Author: Tomas Green (http://www.github.com/tomasgreen)
-	License: MIT
- */
+# controlize
+Author: Tomas Green (http://www.github.com/tomasgreen)
+License: MIT
+Version: 0.1.1
+*/
 (function () {
 	'use strict';
 	var helper = {
@@ -21,6 +22,12 @@
 			if (parent) parent.appendChild(el);
 			if (html) el.innerHTML = html;
 			return el;
+		},
+		removeChildren: function (element) {
+			if (!element) return;
+			while (element.firstChild) {
+				element.removeChild(element.firstChild);
+			}
 		},
 		addEvent: function (el, events, func, useCapture) {
 			if (useCapture === undefined) useCapture = false;
@@ -136,14 +143,8 @@
 			helper.addClass(spinnerElement, 'controlize-spinner-large');
 		}
 		if (!this.opt.showControls) return;
-		var controls = helper.createElement('div' + controlsClass, null, (this.opt.showControls) ? container : null),
-			wrap = helper.createElement('div.media-controls-wrapper', null, controls),
-			left = helper.createElement('div.left', null, wrap),
-			center = helper.createElement('div.center', null, wrap),
-			right = helper.createElement('div.right', null, wrap),
-			paddLeft = 0,
-			paddRight = 0,
-			canPlay = false;
+		this.controls = helper.createElement('div' + controlsClass, null, (this.opt.showControls) ? container : null);
+		var canPlay = false;
 		var enableAll = function () {
 			var btns = container.querySelectorAll('.button'),
 				input = container.querySelector('input'),
@@ -181,39 +182,22 @@
 				element.style.cursor = canPlay ? 'pointer' : 'default';
 			});
 		}
-		helper.addEvent(element, 'canplay', function (ev) {
+		helper.addEvent(element, 'canplay', function () {
 			enableAll();
 			stopSpinner();
 		});
-		helper.addEvent(element, 'error', function (ev) {
+		helper.addEvent(element, 'error', function () {
 			helper.addClass(container, 'controlize-error');
 			disableAll();
-			helper.addClass(controls, 'media-controls-alway-visible');
+			helper.addClass(_this.controls, 'media-controls-alway-visible');
 		});
-		helper.addEvent(element, 'loadstart', function (ev) {
+		helper.addEvent(element, 'loadstart', function () {
 			disableAll();
 			startSpinner();
 		});
-		helper.addEvent(element, 'waiting', function (ev) {
+		helper.addEvent(element, 'waiting', function () {
 			startSpinner();
 		});
-		if (this.opt.showPlayButton) {
-			paddLeft += this.drawPlayButton(left, element);
-		}
-		if (this.opt.showTime) {
-			paddLeft += this.drawTime(left, element);
-		}
-		if (this.opt.showSeekBar) {
-			this.drawSeekBar(center, element);
-		}
-		if (this.opt.showMuteButton) {
-			paddRight += this.drawMuteButton(right, element);
-		}
-		if (this.opt.showFullscreenButton) {
-			paddRight += this.drawFullscreenButton(right, element);
-		}
-		center.style.paddingLeft = paddLeft + 'px';
-		center.style.paddingRight = paddRight + 'px';
 
 		if (this.opt.playWithSpace) {
 			helper.addEvent(document, 'keydown', function (e) {
@@ -229,12 +213,39 @@
 			helper.addEvent(container, 'mousemove', function (ev) {
 				helper.removeClass(container, 'controlize-container-hide-gui');
 				if (_this.mouseMove !== undefined) clearTimeout(_this.mouseMove);
-				if (helper.hasParent(ev.srcElement, controls)) return;
+				if (helper.hasParent(ev.srcElement, _this.controls)) return;
 				_this.mouseMove = setTimeout(function () {
 					helper.addClass(container, 'controlize-container-hide-gui');
 				}, 500);
 			});
 		}
+		this.draw();
+	};
+	controlize.prototype.draw = function () {
+		helper.removeChildren(this.controls);
+		var wrap = helper.createElement('div.media-controls-wrapper', null, this.controls),
+			left = helper.createElement('div.left', null, wrap),
+			center = helper.createElement('div.center', null, wrap),
+			right = helper.createElement('div.right', null, wrap),
+			paddLeft = 0,
+			paddRight = 0;
+		if (this.opt.showPlayButton) {
+			paddLeft += this.drawPlayButton(left, this.element);
+		}
+		if (this.opt.showTime) {
+			paddLeft += this.drawTime(left, this.element);
+		}
+		if (this.opt.showSeekBar) {
+			this.drawSeekBar(center, this.element);
+		}
+		if (this.opt.showMuteButton) {
+			paddRight += this.drawMuteButton(right, this.element);
+		}
+		if (this.opt.showFullscreenButton) {
+			paddRight += this.drawFullscreenButton(right, this.element);
+		}
+		center.style.paddingLeft = paddLeft + 'px';
+		center.style.paddingRight = paddRight + 'px';
 	};
 	controlize.prototype.playPause = function () {
 		if (this.element.paused === true) this.element.play();
@@ -242,11 +253,14 @@
 	};
 	controlize.prototype.drawSeekBar = function (parent, element) {
 		var _this = this,
+			ct = isNaN(element.duration) ? 0 : parseInt((100 / element.duration) * element.currentTime),
 			seek = helper.createElement('div.seek', null, parent),
-			seekValue = helper.createElement('div.seek-value', null, seek),
+			seekValue = helper.createElement('div.seek-value', {
+				width: ct + '%'
+			}, seek),
 			range = helper.createElement('input', {
 				type: 'range',
-				value: 0
+				value: ct
 			}, seek);
 		helper.addEvent(range, 'change', function () {
 			element.currentTime = element.duration * (range.value / 100);
@@ -268,13 +282,16 @@
 		var timeElapsed = helper.createElement('span.time-elapsed', null, time, '0:00');
 		helper.createElement('span.time-separator', null, time);
 		var timeLeft = helper.createElement('span.time-left', null, time, '0:00');
-		helper.addEvent(element, 'timeupdate', function () {
+		var setTimeElapsed = function (el) {
 			var tElapsed = Math.floor(element.currentTime);
-			if (!isNaN(tElapsed)) timeElapsed.textContent = helper.timeToString(tElapsed);
+			timeElapsed.textContent = isNaN(tElapsed) ? '0:00' : helper.timeToString(tElapsed);
 			var tLeft = element.duration - Math.floor(element.currentTime);
-			if (!isNaN(tLeft)) timeLeft.textContent = '-' + helper.timeToString(tLeft);
+			timeLeft.textContent = isNaN(tLeft) ? '0:00' : ('-' + helper.timeToString(tLeft));
+		};
+		helper.addEvent(element, 'timeupdate', function () {
+			setTimeElapsed();
 		});
-		return time.clientWidth;
+		return time.clientWidth || 90;
 	};
 	controlize.prototype.drawFullscreenButton = function (parent, element) {
 		var btn = helper.createElement('button.button', {
@@ -286,24 +303,24 @@
 			else if (element.mozRequestFullScreen) element.mozRequestFullScreen();
 			else if (element.webkitRequestFullscreen) element.webkitRequestFullscreen();
 		});
-		return btn.clientWidth;
+		return btn.clientWidth || 27;
 	};
 	controlize.prototype.drawPlayButton = function (parent, element) {
 		var _this = this;
 		var btn = helper.createElement('button.button', {
 			type: 'button'
-		}, parent, playSvg);
+		}, parent, (element.paused === true) ? playSvg : pauseSvg);
 		if (!isTouch) helper.addClass(btn, 'hover');
-		helper.addEvent(btn, isTouch ? 'touchstart' : 'click', function (ev) {
+		helper.addEvent(btn, isTouch ? 'touchstart' : 'click', function () {
 			_this.playPause();
 		});
-		helper.addEvent(element, 'playing', function (ev) {
+		helper.addEvent(element, 'playing', function () {
 			btn.innerHTML = (element.paused === true) ? playSvg : pauseSvg;
 		});
-		helper.addEvent(element, 'pause', function (ev) {
+		helper.addEvent(element, 'pause', function () {
 			btn.innerHTML = playSvg;
 		});
-		return btn.clientWidth;
+		return btn.clientWidth || 27;
 	};
 	controlize.prototype.drawMuteButton = function (parent, element) {
 		var btn = helper.createElement('button.button', {
@@ -314,7 +331,7 @@
 			element.muted = !element.muted;
 			btn.innerHTML = (element.muted) ? volumeDownSvg : volumeUpSvg;
 		});
-		return btn.clientWidth;
+		return btn.clientWidth || 30;
 	};
 	this.controlize = controlize;
 }).call(this);
