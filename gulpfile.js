@@ -41,7 +41,7 @@ gulp.task('less', function () {
 		.pipe(gulp.dest('./build/'))
 		.pipe(rename(name + '.min.css'))
 		.pipe(minifyCSS({
-			keepSpecialComments: 0
+			keepSpecialComments: 1
 		}))
 		.pipe(gulp.dest('./build/'))
 		.pipe(gulp.dest('./examples/static'));

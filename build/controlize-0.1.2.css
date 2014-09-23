@@ -238,7 +238,7 @@
 .controlize-container .button:not([disabled]):hover {
   cursor: pointer;
 }
-.controlize-container .hover:not([disabled]):hover svg * {
+.controlize-container .button-hover:not([disabled]):hover svg * {
   fill: #7FDBFF;
 }
 .controlize-error {
