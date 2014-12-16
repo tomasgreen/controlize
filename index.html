@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="">
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -42,14 +42,14 @@
 				<div class="col">
 					<h1>Video</h1>
 					<video id="video1">
-						<source src="media/sheep.mp4" type="video/mp4">
-						<source src="media/sheep.webm" type="video/webm">
+						<source src="http://www.tomasgreen.se/controlize/media/sheep.mp4" type="video/mp4">
+						<source src="http://www.tomasgreen.se/controlize/media/sheep.webm" type="video/webm">
 					</video>
 				</div>
 			</div>
 			<div class="row">
 				<div class="col">
-					<pre><code class="js">new controlize(document.getElementById('video1'));</code></pre>
+					<pre><code class="js">var instance = controlize(document.getElementById('video1'));</code></pre>
 				</div>
 			</div>
 			<div class="row">
@@ -71,14 +71,14 @@
 				<div class="col">
 					<h1>Audio</h1>
 					<audio id="audio1">
-						<source src="media/html5audio.mp3" type="audio/mp3"/>
-						<source src="media/html5audio.ogg" type="audio/ogg"/>
+						<source src="http://www.tomasgreen.se/controlize/media/html5audio.mp3" type="audio/mp3"/>
+						<source src="http://www.tomasgreen.se/controlize/media/html5audio.ogg" type="audio/ogg"/>
 					</audio>
 				</div>
 			</div>
 			<div class="row">
 				<div class="col">
-					<pre><code class="js">new controlize(document.getElementById('audio1'),{
+					<pre><code class="js">var instance = controlize(document.getElementById('audio1'),{
     playWithSpace: false
 });</code></pre>
 				</div>
@@ -201,8 +201,8 @@
 	<script type="text/javascript">
 		hljs.initHighlightingOnLoad();
 		document.addEventListener('DOMContentLoaded', function () {
-			new controlize(document.getElementById('video1'));
-			new controlize(document.getElementById('audio1'),{
+			controlize(document.getElementById('video1'));
+			controlize(document.getElementById('audio1'),{
 				playWithSpace: false
 			});
 		});
