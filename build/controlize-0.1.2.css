@@ -17,6 +17,7 @@
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+  -webkit-tap-highlight-color: transparent;
 }
 .controlize-container * {
   -webkit-touch-callout: none;
@@ -25,6 +26,7 @@
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+  -webkit-tap-highlight-color: transparent;
   line-height: 1;
   box-sizing: border-box;
 }
@@ -56,7 +58,7 @@
   transition: opacity .3s;
   background-color: rgba(0, 0, 0, 0.8);
 }
-.controlize-container .media-controls-alway-visible {
+.controlize-container .media-controls-always-visible {
   position: relative;
   opacity: 1;
   min-height: 41px;

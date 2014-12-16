@@ -49,7 +49,7 @@
 			</div>
 			<div class="row">
 				<div class="col">
-					<pre><code class="js">new controlize(document.getElementById('video1'));</code></pre>
+					<pre><code class="js">var instance = controlize(document.getElementById('video1'));</code></pre>
 				</div>
 			</div>
 			<div class="row">
@@ -78,7 +78,7 @@
 			</div>
 			<div class="row">
 				<div class="col">
-					<pre><code class="js">new controlize(document.getElementById('audio1'),{
+					<pre><code class="js">var instance = controlize(document.getElementById('audio1'),{
     playWithSpace: false
 });</code></pre>
 				</div>
@@ -201,8 +201,8 @@
 	<script type="text/javascript">
 		hljs.initHighlightingOnLoad();
 		document.addEventListener('DOMContentLoaded', function () {
-			new controlize(document.getElementById('video1'));
-			new controlize(document.getElementById('audio1'),{
+			controlize(document.getElementById('video1'));
+			controlize(document.getElementById('audio1'),{
 				playWithSpace: false
 			});
 		});

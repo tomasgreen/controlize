@@ -86,8 +86,8 @@
 
 	function _timeToString(t) {
 		var time = parseInt(t),
-			hrs = ~~ (time / 3600),
-			mins = ~~ ((time % 3600) / 60),
+			hrs = ~~(time / 3600),
+			mins = ~~((time % 3600) / 60),
 			secs = time % 60,
 			ret = '';
 		if (hrs > 0) ret += '' + hrs + ':' + (mins < 10 ? '0' : '');
@@ -113,18 +113,18 @@
 		The mutebuttons i stolen from http://fontawesome.io
 	*/
 	var muteSvg = '<svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="16.2px" height="13px" viewBox="0 0 16.2 13" enable-background="new 0 0 16.2 13"><path d="M2.9,8.5l3.6,2.8V1.6L2.9,4.5H0v4.1h2.9V8.5z"/></svg>';
-	var unmuteSvg = '<svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="16.2px" height="13px" viewBox="0 0 16.2 13" enable-background="new 0 0 16.2 13"><path  d="M14.1,13c1.3-1.8,2.1-4.1,2.1-6.5S15.4,1.8,14.1,0l-0.7,0.5c1.2,1.7,2,3.8,2,6s-0.8,4.3-2,6L14.1,13z M11.4,1.6l-0.7,0.5c0.9,1.2,1.5,2.7,1.5,4.4s-0.6,3.1-1.5,4.4l0.7,0.5c1-1.4,1.6-3,1.6-4.9S12.4,3,11.4,1.6z M9,3.2L8.3,3.8 c0.6,0.8,0.9,1.7,0.9,2.7s-0.3,2-0.9,2.7L9,9.8c0.7-0.9,1.1-2,1.1-3.2S9.7,4.2,9,3.2z M2.9,8.5l3.6,2.8V1.6L2.9,4.5H0v4.1H2.9z"/></svg>';
+	var unmuteSvg = '<svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="16.2px" height="13px" viewBox="0 0 16.2 13" enable-background="new 0 0 16.2 13"><path d="M14.1,13c1.3-1.8,2.1-4.1,2.1-6.5S15.4,1.8,14.1,0l-0.7,0.5c1.2,1.7,2,3.8,2,6s-0.8,4.3-2,6L14.1,13z M11.4,1.6l-0.7,0.5c0.9,1.2,1.5,2.7,1.5,4.4s-0.6,3.1-1.5,4.4l0.7,0.5c1-1.4,1.6-3,1.6-4.9S12.4,3,11.4,1.6z M9,3.2L8.3,3.8 c0.6,0.8,0.9,1.7,0.9,2.7s-0.3,2-0.9,2.7L9,9.8c0.7-0.9,1.1-2,1.1-3.2S9.7,4.2,9,3.2z M2.9,8.5l3.6,2.8V1.6L2.9,4.5H0v4.1H2.9z"/></svg>';
 	/*
-		The mutebuttons i stolen from http://ionicons.com
+		The play and pause buttons i stolen from http://ionicons.com
 	*/
 	var playSvg = '<svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="10.4px" height="13px" viewBox="0 0 10.4 13" enable-background="new 0 0 10.4 13"><path d="M0,13L0,13l10.4-6.5L0,0V13z"/></svg>';
 	var pauseSvg = '<svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="10.4px" height="13px" viewBox="0 0 10.4 13" enable-background="new 0 0 10.4 13"><path d="M0,0v13h3.2V0H0z M7.2,0v13h3.2V0H7.2z"/></svg>';
 	/*
 		The spinner i stolen from https://github.com/jxnblk/loading
 	*/
-	var spinner = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32" fill="white"><circle transform="translate(8 0)" cx="0" cy="16" r="0"> <animate attributeName="r" values="0; 4; 0; 0" dur="1.2s" repeatCount="indefinite" begin="0" keytimes="0;0.2;0.7;1"keySplines="0.2 0.2 0.4 0.8;0.2 0.6 0.4 0.8;0.2 0.6 0.4 0.8" calcMode="spline" /></circle><circle transform="translate(16 0)" cx="0" cy="16" r="0"><animate attributeName="r" values="0; 4; 0; 0" dur="1.2s" repeatCount="indefinite" begin="0.3" keytimes="0;0.2;0.7;1"keySplines="0.2 0.2 0.4 0.8;0.2 0.6 0.4 0.8;0.2 0.6 0.4 0.8" calcMode="spline" /></circle><circle transform="translate(24 0)" cx="0" cy="16" r="0"> <animate attributeName="r" values="0; 4; 0; 0" dur="1.2s" repeatCount="indefinite" begin="0.6" keytimes="0;0.2;0.7;1"keySplines="0.2 0.2 0.4 0.8;0.2 0.6 0.4 0.8;0.2 0.6 0.4 0.8" calcMode="spline" /></circle></svg>';
+	var spinner = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32" fill="white"><circle transform="translate(8 0)" cx="0" cy="16" r="0"> <animate attributeName="r" values="0; 4; 0; 0" dur="1.2s" repeatCount="indefinite" begin="0" keytimes="0;0.2;0.7;1" keySplines="0.2 0.2 0.4 0.8;0.2 0.6 0.4 0.8;0.2 0.6 0.4 0.8" calcMode="spline" /></circle><circle transform="translate(16 0)" cx="0" cy="16" r="0"><animate attributeName="r" values="0; 4; 0; 0" dur="1.2s" repeatCount="indefinite" begin="0.3" keytimes="0;0.2;0.7;1" keySplines="0.2 0.2 0.4 0.8;0.2 0.6 0.4 0.8;0.2 0.6 0.4 0.8" calcMode="spline" /></circle><circle transform="translate(24 0)" cx="0" cy="16" r="0"><animate attributeName="r" values="0; 4; 0; 0" dur="1.2s" repeatCount="indefinite" begin="0.6" keytimes="0;0.2;0.7;1" keySplines="0.2 0.2 0.4 0.8;0.2 0.6 0.4 0.8;0.2 0.6 0.4 0.8" calcMode="spline" /></circle></svg>';
 
-	var controlize = function (element, options) {
+	var Controlize = function (element, options) {
 		if (!element || !element.canPlayType) return;
 		var _this = this;
 		this.isAudio = (element.tagName.toLowerCase() == 'audio');
@@ -150,7 +150,7 @@
 			if (options.showMuteButton === undefined) this.opt.showMuteButton = false;
 			if (options.playWithMouse === undefined) this.opt.playWithMouse = false;
 			if (options.playWithSpace === undefined) this.opt.playWithSpace = false;
-			controlsClass += '.media-controls-alway-visible';
+			controlsClass += '.media-controls-always-visible';
 		}
 		if (this.isAudio) {
 			_addClass(spinnerElement, 'controlize-spinner-small');
@@ -208,7 +208,7 @@
 		});
 		_on(element, 'error', function () {
 			_addClass(container, 'controlize-error');
-			_addClass(_this.controls, 'media-controls-alway-visible');
+			_addClass(_this.controls, 'media-controls-always-visible');
 			disableAll();
 		});
 		_on(element, 'loadstart', function () {
@@ -241,7 +241,7 @@
 		}
 		this.draw();
 	};
-	controlize.prototype.draw = function () {
+	Controlize.prototype.draw = function () {
 		_removeChildren(this.controls);
 		var wrap = _createElement('div.media-controls-wrapper', null, this.controls),
 			left = _createElement('div.left', null, wrap),
@@ -267,11 +267,11 @@
 		center.style.paddingLeft = paddLeft + 'px';
 		center.style.paddingRight = paddRight + 'px';
 	};
-	controlize.prototype.playPause = function () {
+	Controlize.prototype.playPause = function () {
 		if (this.element.paused === true) this.element.play();
 		else this.element.pause();
 	};
-	controlize.prototype.drawSeekBar = function (parent, element) {
+	Controlize.prototype.drawSeekBar = function (parent, element) {
 		var _this = this,
 			ct = isNaN(element.duration) ? 0 : parseInt((100 / element.duration) * element.currentTime),
 			seek = _createElement('div.seek', null, parent),
@@ -297,7 +297,7 @@
 			if (_this.opt.playOnSeek) element.play();
 		});
 	};
-	controlize.prototype.drawTime = function (parent, element) {
+	Controlize.prototype.drawTime = function (parent, element) {
 		var time = _createElement('div.time', null, parent);
 		var timeElapsed = _createElement('span.time-elapsed', null, time, '0:00');
 		_createElement('span.time-separator', null, time);
@@ -315,7 +315,7 @@
 		setTimeElapsed();
 		return time.clientWidth || 90;
 	};
-	controlize.prototype.drawFullscreenButton = function (parent, element) {
+	Controlize.prototype.drawFullscreenButton = function (parent, element) {
 		var btn = _createElement('button.button', {
 			type: 'button'
 		}, parent, resizeSvg);
@@ -327,7 +327,7 @@
 		});
 		return btn.clientWidth || 27;
 	};
-	controlize.prototype.drawPlayButton = function (parent, element) {
+	Controlize.prototype.drawPlayButton = function (parent, element) {
 		var _this = this;
 		var btn = _createElement('button.button', {
 			type: 'button'
@@ -344,7 +344,7 @@
 		});
 		return btn.clientWidth || 27;
 	};
-	controlize.prototype.drawMuteButton = function (parent, element) {
+	Controlize.prototype.drawMuteButton = function (parent, element) {
 		var btn = _createElement('button.button', {
 			type: 'button'
 		}, parent, (element.muted ? muteSvg : unmuteSvg));
@@ -356,6 +356,9 @@
 		return btn.clientWidth || 30;
 	};
 
-	this.controlize = controlize;
+	this.controlize = function (element, options) {
+		return new Controlize(element, options);
+	};
+	this.controlize.globals = defaults;
 
 }).call(this);

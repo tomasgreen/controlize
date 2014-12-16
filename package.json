@@ -4,7 +4,7 @@
 	"private": true,
 	"author": "Tomas Green",
 	"license": "MIT",
-	"dependencies": {
+	"devDependencies": {
 		"gulp": "*",
 		"gulp-concat": "*",
 		"gulp-minify-css": "*",
