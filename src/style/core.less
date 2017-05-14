@@ -1,46 +1,42 @@
 .controlize-container-hide-gui {
-	.media-controls{
+	.media-controls {
 		opacity: 0!important;
 	}
 	video {
 		cursor: none!important;
 	}
 }
-.no-select() {
-	-webkit-touch-callout: none;
-	-webkit-user-select: none;
-	-khtml-user-select: none;
-	-moz-user-select: none;
-	-ms-user-select: none;
-	user-select: none;
-	-webkit-tap-highlight-color: transparent;
-}
+
 .controlize-container {
+	touch-action: manipulation;
 	overflow: hidden;
 	line-height: 0;
 	position: relative;
 	font-size: 14px;
 	background-color: #000;
 	box-sizing: border-box;
-	.no-select();
+	user-select: none;
+	background-position: center center;
+	background-size: cover;
+	background-repeat: no-repeat;
 	* {
-		.no-select();
+		user-select: none;
 		line-height: 1;
 		box-sizing: border-box;
 	}
-
-	video,audio {
+	video, audio {
+		display: block;
+		object-fit: contain;
 		min-width: 100%;
 		max-width: 100%;
-		width: 100%;
 	}
 	video:-webkit-fullscreen {
-		min-width: auto;
-		max-width: auto;
-		min-height: 100%;
 		height: 100%;
+		background-image: none;
+		cursor: default!important;
 	}
 	.media-controls {
+		display: block;
 		height: 40px;
 		position: absolute;
 		width: 100%;
@@ -49,12 +45,11 @@
 		left: 0;
 		right: 0;
 		opacity: 0;
-		-webkit-transition: opacity .3s;
-		-moz-transition: opacity .3s;
-		-o-transition: opacity .3s;
-		-ms-transition: opacity .3s;
 		transition: opacity .3s;
 		background-color: rgba(0, 0, 0, 0.8);
+	}
+	.media-image {
+		width: 100%;
 	}
 	.media-controls-always-visible {
 		position: relative;
@@ -87,14 +82,10 @@
 		position: relative;
 		display: block;
 	}
-	.seek[disabled]{
+	.seek[disabled] {
 		opacity: 0.2;
 	}
 	.seek {
-		-webkit-transition: opacity .3s;
-		-moz-transition: opacity .3s;
-		-o-transition: opacity .3s;
-		-ms-transition: opacity .3s;
 		transition: opacity .3s;
 		position: relative;
 		display: block;
@@ -109,8 +100,7 @@
 			height: 2px;
 			background-color: rgba(0, 0, 0, 0.5);
 		}
-		input[type='range']:focus,
-		input[type='range']:selected {
+		input[type='range']:focus, input[type='range']:selected {
 			outline: none;
 		}
 		input[type='range'] {
@@ -121,7 +111,7 @@
 			top: 50%;
 			margin-top: -1px;
 			width: 100%;
-			-webkit-appearance: none;
+			appearance: none;
 			box-shadow: none;
 			background-color: transparent;
 			height: 2px;
@@ -135,7 +125,7 @@
 			top: 50%;
 			margin-top: -1px;
 			width: 100%;
-			-webkit-appearance: none;
+			appearance: none;
 			box-shadow: none;
 			background-color: transparent;
 			height: 2px;
@@ -143,7 +133,7 @@
 		}
 		input[type='range']::-webkit-slider-thumb {
 			cursor: pointer;
-			-webkit-appearance: none !important;
+			appearance: none !important;
 			border-radius: 50%;
 			background-color: #fff;
 			border: 0;
@@ -152,7 +142,7 @@
 		}
 		input[type='range']::-moz-range-thumb {
 			cursor: pointer;
-			-webkit-appearance: none !important;
+			appearance: none !important;
 			border-radius: 50%;
 			background-color: #fff;
 			border: 0;
@@ -163,7 +153,7 @@
 	.time {
 		padding-top: 15px;
 		float: right;
-		font-family: 'Helvetica Neue','Open Sans','Helvetica','Arial',sans-serif;
+		font-family: 'Helvetica Neue', 'Open Sans', 'Helvetica', 'Arial', sans-serif;
 		font-weight: 300;
 		font-size: 12px;
 		text-align: center;
@@ -190,14 +180,12 @@
 		margin-top: -15px;
 		margin-left: -15px;
 	}
-	.time .time-separator{
+	.time .time-separator {
 		border-right: 1px solid rgba(255, 255, 255, 0.2);
 		margin-left: 5px;
 		margin-right: 5px;
 	}
-
-	.button:focus,
-	.button:selected {
+	.button:focus, .button:selected {
 		outline: 0;
 	}
 	.button {
@@ -213,17 +201,12 @@
 		line-height: 0;
 		min-width: 13px;
 		min-height: 13px;
-		-webkit-user-select: none;
-		-moz-user-select: none;
-		-ms-user-select: none;
 		user-select: none;
 	}
-	.button:focus,
-	.button:active:focus{
+	.button:focus, .button:active:focus {
 		outline: 0;
 	}
-	.button:hover,
-	.button:focus {
+	.button:hover, .button:focus {
 		text-decoration: none;
 	}
 	.button:active {
@@ -236,16 +219,18 @@
 	.button[disabled] {
 		opacity: 0.2;
 	}
-	.button:not([disabled]):hover{
+	.button:not([disabled]):hover {
 		cursor: pointer;
 	}
-	.button-hover:not([disabled]):hover svg *{
+	.button-hover:not([disabled]):hover svg * {
 		fill: #7FDBFF;
 	}
 }
+
 .controlize-error {
 	background-color: #ff4136;
 }
-.controlize-error video,.controlize-error audio {
+
+.controlize-error video, .controlize-error audio {
 	background-color: #ff4136;
 }

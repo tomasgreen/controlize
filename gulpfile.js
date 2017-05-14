@@ -10,7 +10,8 @@ var gulp = require('gulp'),
 	watch = (argv.watch !== undefined),
 	spawn = require('child_process').spawn,
 	name = require('./package.json').name + '-' + require('./package.json').version,
-	node;
+	node,
+	autoprefixer = require('gulp-autoprefixer')
 /*
 	watch
 */
@@ -37,6 +38,10 @@ gulp.task('js', function () {
 gulp.task('less', function () {
 	gulp.src('./src/style/*.less')
 		.pipe(less())
+		.pipe(autoprefixer({
+            browsers: ['last 3 versions', 'android >= 4.2'],
+            cascade: false
+        }))
 		.pipe(rename(name + '.css'))
 		.pipe(gulp.dest('./build/'))
 		.pipe(rename(name + '.min.css'))

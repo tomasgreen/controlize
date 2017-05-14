@@ -102,9 +102,9 @@
 		showTime: true,
 		showPlayButton: true,
 		showSeekBar: true,
-		playWithSpace: true,
+		playWithSpace: false,
 		playWithMouse: true,
-		hideMouseOnHover: true,
+		hideMouseOnHover: false,
 		playOnSeek: true
 	};
 	var isTouch = 'ontouchstart' in document.documentElement;
@@ -123,7 +123,7 @@
 		The spinner i stolen from https://github.com/jxnblk/loading
 	*/
 	var spinner = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32" fill="white"><circle transform="translate(8 0)" cx="0" cy="16" r="0"> <animate attributeName="r" values="0; 4; 0; 0" dur="1.2s" repeatCount="indefinite" begin="0" keytimes="0;0.2;0.7;1" keySplines="0.2 0.2 0.4 0.8;0.2 0.6 0.4 0.8;0.2 0.6 0.4 0.8" calcMode="spline" /></circle><circle transform="translate(16 0)" cx="0" cy="16" r="0"><animate attributeName="r" values="0; 4; 0; 0" dur="1.2s" repeatCount="indefinite" begin="0.3" keytimes="0;0.2;0.7;1" keySplines="0.2 0.2 0.4 0.8;0.2 0.6 0.4 0.8;0.2 0.6 0.4 0.8" calcMode="spline" /></circle><circle transform="translate(24 0)" cx="0" cy="16" r="0"><animate attributeName="r" values="0; 4; 0; 0" dur="1.2s" repeatCount="indefinite" begin="0.6" keytimes="0;0.2;0.7;1" keySplines="0.2 0.2 0.4 0.8;0.2 0.6 0.4 0.8;0.2 0.6 0.4 0.8" calcMode="spline" /></circle></svg>';
-
+	var bg = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA8AAAAPCAYAAAA71pVKAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyhpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNi1jMTM4IDc5LjE1OTgyNCwgMjAxNi8wOS8xNC0wMTowOTowMSAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIDIwMTcgKE1hY2ludG9zaCkiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6QjQ2OEI3RjlBRTJBMTFFNkExMDdDNTc5QTg5OTBFMTgiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6QjQ2OEI3RkFBRTJBMTFFNkExMDdDNTc5QTg5OTBFMTgiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDpCNDY4QjdGN0FFMkExMUU2QTEwN0M1NzlBODk5MEUxOCIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDpCNDY4QjdGOEFFMkExMUU2QTEwN0M1NzlBODk5MEUxOCIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PiratjEAAAAdSURBVHjaYvz//z8DuYCJgQIwqnlU86hmLAAgwADiEwMb/6DWRQAAAABJRU5ErkJggg=='
 	var Controlize = function (element, options) {
 		if (!element || !element.canPlayType) return;
 		var _this = this;
@@ -141,16 +141,30 @@
 
 		var container = _createElement('div.controlize-container');
 		element.parentNode.insertBefore(container, element);
+		
+		var clickableElement = element
+		var poster = element.getAttribute('poster')
+		if (poster) {
+			if(this.isAudio) {
+				var img = _createElement('img.media-image');
+				img.src = poster;
+				container.appendChild(img);
+				clickableElement = img
+			} else {
+				container.setAttribute('data-poster', poster)
+				element.setAttribute('poster', bg);
+				container.style.backgroundImage = "url('" + poster + "')";
+			}
+		}
 		container.appendChild(element);
-
 		var controlsClass = '.media-controls';
 		if (isTouch || this.isAudio) {
 			if (options.showFullscreenButton === undefined) this.opt.showFullscreenButton = false;
 			if (options.hideMouseOnHover === undefined) this.opt.hideMouseOnHover = false;
 			if (options.showMuteButton === undefined) this.opt.showMuteButton = false;
-			if (options.playWithMouse === undefined) this.opt.playWithMouse = false;
-			if (options.playWithSpace === undefined) this.opt.playWithSpace = false;
-			controlsClass += '.media-controls-always-visible';
+			if (options.playWithMouse === undefined) this.opt.playWithMouse = (poster);
+			if (options.playWithSpace === undefined) this.opt.playWithSpace = (poster);
+			controlsClass += (!poster) ? '.media-controls-always-visible' : '';
 		}
 		if (this.isAudio) {
 			_addClass(spinnerElement, 'controlize-spinner-small');
@@ -195,11 +209,11 @@
 		}
 
 		if (this.opt.playWithMouse) {
-			_on(element, 'click', function () {
+			_on(clickableElement, 'click', function () {
 				if (canPlay) _this.playPause();
 			});
-			if (!isTouch) _on(element, 'mouseover', function () {
-				element.style.cursor = canPlay ? 'pointer' : 'default';
+			if (!isTouch) _on(clickableElement, 'mouseover', function () {
+				clickableElement.style.cursor = canPlay ? 'pointer' : 'default';
 			});
 		}
 		_on(element, 'canplay', function () {
@@ -283,6 +297,7 @@
 				value: ct
 			}, seek);
 		_on(range, 'change', function () {
+			if(element.paused) return
 			element.currentTime = element.duration * (range.value / 100);
 		});
 		_on(element, 'timeupdate', function () {
